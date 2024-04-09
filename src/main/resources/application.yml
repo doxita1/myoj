@@ -3,7 +3,7 @@
 # @from <a href="https://yupi.icu">编程导航知识星球</a>
 spring:
   application:
-    name: springboot-init
+    name: yuoj-backend
   # 默认 dev 环境
   profiles:
     active: dev
@@ -21,9 +21,9 @@ spring:
   # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my_db
+    url: jdbc:mysql://localhost:3306/yuoj
     username: root
-    password: 123456
+    password: 123
   # Redis 配置
   # todo 需替换配置，然后取消注释
 #  redis:
@@ -44,7 +44,7 @@ spring:
       # 大小限制
       max-file-size: 10MB
 server:
-  address: 0.0.0.0
+  address: 127.0.0.1
   port: 8101
   servlet:
     context-path: /api
@@ -100,4 +100,4 @@ knife4j:
       default:
         api-rule: package
         api-rule-resources:
-          - com.yupi.springbootinit.controller
+          - com.yupi.yuoj.controller
