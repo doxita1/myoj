@@ -15,7 +15,10 @@ import java.util.stream.Collectors;
 public enum JudgeInfoMessageEnum {
     //todo judgeInfo枚举类遍历
 
-    USER_AVATAR("用户头像", "user_avatar");
+    ACCEPTED("成功", "accepted"),
+    WRONG_ANSWER("答案错误","wrong answer"),
+    TIME_OUT_LIMIT("超时","time out limit"),
+    MEMORY_OUT_LIMIT("内存超限","memory out limit");
 
     private final String text;
 
