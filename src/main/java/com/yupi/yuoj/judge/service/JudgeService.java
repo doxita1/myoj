@@ -1,7 +1,7 @@
 package com.yupi.yuoj.judge.service;
 
-import com.yupi.yuoj.model.dto.questionsubmit.JudgeInfo;
+import com.yupi.yuoj.model.entity.QuestionSubmit;
 
 public interface JudgeService {
-    JudgeInfo doJudgeCode(Long questionSubmitId);
+    QuestionSubmit doJudgeCode(Long questionSubmitId);
 }

@@ -15,7 +15,6 @@ public class CodeSandProxy implements CodeSandBox{
         log.info("代码沙箱请求信息:{}",executeCodeRequest.toString());
         ExecuteCodeResponse executeCodeResponse = codeSandBox.executeCode(executeCodeRequest);
         log.info("代码沙箱请求信息:{}",executeCodeResponse.toString());
-
-        return null;
+        return executeCodeResponse;
     }
 }

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.yuoj.common.ErrorCode;
 import com.yupi.yuoj.constant.CommonConstant;
 import com.yupi.yuoj.exception.BusinessException;
+import com.yupi.yuoj.judge.service.JudgeService;
 import com.yupi.yuoj.mapper.QuestionSubmitMapper;
 import com.yupi.yuoj.model.dto.question.QuestionAddRequest;
 import com.yupi.yuoj.model.dto.question.QuestionEditRequest;
@@ -29,6 +30,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +55,10 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
     @Resource
     private UserService userService;
+
+    @Resource
+    @Lazy
+    private JudgeService judgeService;
 
     /**
      * 题目提交
@@ -87,13 +94,17 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         //todo 设置题目信息
         questionSubmit.setJudgeInfo("{}");
         boolean save = this.save(questionSubmit);
-        if (save == false) {
+        if (!save) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "提交失败");
         }
-        // 返回题目号
 
-        //todo: 执行判题服务
-        return questionSubmit.getId();
+        // 返回题目号
+        Long questionSubmitId =questionSubmit.getId();
+        CompletableFuture.runAsync(()->{
+            //todo: 执行判题服务
+            judgeService.doJudgeCode(questionSubmitId);
+        });
+        return questionSubmitId;
     }
 
     public QueryWrapper<QuestionSubmit> getQueryWrapper(QuestionSubmitQueryRequest questionSubmitQueryRequest) {
