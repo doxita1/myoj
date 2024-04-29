@@ -103,4 +103,4 @@ knife4j:
           - com.yupi.yuoj.controller
 
 codesandbox:
-  value:
+  value: remote

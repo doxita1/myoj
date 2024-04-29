@@ -14,14 +14,20 @@ import java.util.List;
 @SpringBootTest
 class CodeSandBoxTest {
 
-    @Value("${codesandbox.value :default}")
+    @Value("${codesandbox.value}")
     private String type;
 
     @Test
     void executeCode() {
-        CodeSandBox codeSandBox = CodeSandBoxFactory.newInstance("example");
+        CodeSandBox codeSandBox = CodeSandBoxFactory.newInstance(type);
         codeSandBox = new CodeSandProxy(codeSandBox);// 使用他的代理对象
-        String code = "int main()";
+        String code = "public class Main {\n" +
+                "    public static void main(String[] args) {\n" +
+                "        int a = Integer.parseInt(args[0]);\n" +
+                "        int b = Integer.parseInt(args[1]);\n" +
+                "        System.out.println(\"结果是:\"+(a+b));\n" +
+                "    }\n" +
+                "}";
         String language = QuestionSubmitLanguageEnum.JAVA.getValue();
         List<String> inputList = Arrays.asList("1 2","3 4");
 
