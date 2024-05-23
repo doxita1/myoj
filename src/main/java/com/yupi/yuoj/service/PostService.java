@@ -11,14 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 帖子服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public interface PostService extends IService<Post> {
 
     /**
      * 校验
-     *
      * @param post
      * @param add
      */
@@ -26,7 +23,6 @@ public interface PostService extends IService<Post> {
 
     /**
      * 获取查询条件
-     *
      * @param postQueryRequest
      * @return
      */
@@ -34,7 +30,6 @@ public interface PostService extends IService<Post> {
 
     /**
      * 从 ES 查询
-     *
      * @param postQueryRequest
      * @return
      */
@@ -42,7 +37,6 @@ public interface PostService extends IService<Post> {
 
     /**
      * 获取帖子封装
-     *
      * @param post
      * @param request
      * @return
@@ -51,7 +45,6 @@ public interface PostService extends IService<Post> {
 
     /**
      * 分页获取帖子封装
-     *
      * @param postPage
      * @param request
      * @return

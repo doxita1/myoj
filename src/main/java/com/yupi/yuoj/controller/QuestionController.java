@@ -11,11 +11,15 @@ import com.yupi.yuoj.constant.UserConstant;
 import com.yupi.yuoj.exception.BusinessException;
 import com.yupi.yuoj.exception.ThrowUtils;
 import com.yupi.yuoj.model.dto.question.*;
-import com.yupi.yuoj.model.dto.user.UserQueryRequest;
+import com.yupi.yuoj.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.yupi.yuoj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.yupi.yuoj.model.entity.Question;
+import com.yupi.yuoj.model.entity.QuestionSubmit;
 import com.yupi.yuoj.model.entity.User;
+import com.yupi.yuoj.model.vo.QuestionSubmitVO;
 import com.yupi.yuoj.model.vo.QuestionVO;
 import com.yupi.yuoj.service.QuestionService;
+import com.yupi.yuoj.service.QuestionSubmitService;
 import com.yupi.yuoj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -27,10 +31,7 @@ import java.util.List;
 
 /**
  * 题目接口
- *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
- */
+ **/
 @RestController
 @RequestMapping("/question")
 @Slf4j
@@ -41,12 +42,14 @@ public class QuestionController {
 
     @Resource
     private UserService userService;
+    
+    @Resource
+    private QuestionSubmitService questionSubmitService;
 
     // region 增删改查
 
     /**
      * 创建
-     *
      * @param questionAddRequest
      * @param request
      * @return
@@ -86,7 +89,6 @@ public class QuestionController {
 
     /**
      * 删除
-     *
      * @param deleteRequest
      * @param request
      * @return
@@ -111,7 +113,6 @@ public class QuestionController {
 
     /**
      * 更新（仅管理员）
-     *
      * @param questionUpdateRequest
      * @return
      */
@@ -147,7 +148,6 @@ public class QuestionController {
 
     /**
      * 根据 id 获取
-     *
      * @param id
      * @return
      */
@@ -165,7 +165,6 @@ public class QuestionController {
 
     /**
      * 分页获取列表（仅管理员）
-     *
      * @param questionQueryRequest
      * @return
      */
@@ -182,7 +181,6 @@ public class QuestionController {
 
     /**
      * 分页获取列表（封装类）
-     *
      * @param questionQueryRequest
      * @param request
      * @return
@@ -201,7 +199,6 @@ public class QuestionController {
 
     /**
      * 分页获取当前用户创建的资源列表
-     *
      * @param questionQueryRequest
      * @param request
      * @return
@@ -227,7 +224,6 @@ public class QuestionController {
 
     /**
      * 编辑（用户）
-     *
      * @param questionEditRequest
      * @param request
      * @return
@@ -264,6 +260,42 @@ public class QuestionController {
         }
         boolean result = questionService.updateById(question);
         return ResultUtils.success(result);
+    }
+    
+    /**
+     * 点赞 / 取消点赞
+     * @param questionSubmitAddRequest
+     * @param request
+     * @return resultNum 本次点赞变化数
+     */
+    @PostMapping("/question_submit/do")
+    public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+                                               HttpServletRequest request) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 登录才能点赞
+        final User loginUser = userService.getLoginUser(request);
+        long questionId = questionSubmitAddRequest.getQuestionId();
+        long result = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(result);
+    }
+    
+    /**
+     * 分页获取,本人或管理员可以查看提交的代码
+     * @param questionSubmitQueryRequest
+     * @return
+     */
+    @PostMapping("/question_submit/list/page")
+    public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+                                                                         HttpServletRequest request) {
+        long current = questionSubmitQueryRequest.getCurrent();
+        long size = questionSubmitQueryRequest.getPageSize();
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        final User loginUser = userService.getLoginUser(request);
+        
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage,loginUser));
     }
 
 //    @PostMapping("/list/page")

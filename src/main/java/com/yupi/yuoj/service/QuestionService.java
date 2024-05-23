@@ -2,10 +2,9 @@ package com.yupi.yuoj.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.yupi.yuoj.model.dto.question.QuestionQueryRequest;
 import com.yupi.yuoj.model.entity.Question;
-import com.yupi.yuoj.model.entity.Question;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.yupi.yuoj.model.vo.QuestionVO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface QuestionService extends IService<Question> {
     /**
      * 校验
-     *
      * @param question
      * @param add
      */
@@ -26,7 +24,6 @@ public interface QuestionService extends IService<Question> {
 
     /**
      * 获取查询条件
-     *
      * @param questionQueryRequest
      * @return
      */
@@ -35,7 +32,6 @@ public interface QuestionService extends IService<Question> {
 
     /**
      * 获取问题封装
-     *
      * @param question
      * @param request
      * @return
@@ -44,7 +40,6 @@ public interface QuestionService extends IService<Question> {
 
     /**
      * 分页获取问题封装
-     *
      * @param questionPage
      * @param request
      * @return

@@ -1,16 +1,14 @@
 package com.yupi.yuoj.model.enums;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * 用户角色枚举
- *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
- */
+ **/
 public enum UserRoleEnum {
 
     USER("用户", "user"),
@@ -28,8 +26,7 @@ public enum UserRoleEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
+     *    * @return
      */
     public static List<String> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
@@ -37,7 +34,6 @@ public enum UserRoleEnum {
 
     /**
      * 根据 value 获取枚举
-     *
      * @param value
      * @return
      */

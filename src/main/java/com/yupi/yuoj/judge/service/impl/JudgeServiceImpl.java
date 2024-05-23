@@ -44,7 +44,7 @@ public class JudgeServiceImpl implements JudgeService {
     @Resource
     JudgeManager judgeManager;
 
-    @Value("${codesandbox.value :default}")
+    @Value("${codesandbox.value}")
     private String type;
 
 

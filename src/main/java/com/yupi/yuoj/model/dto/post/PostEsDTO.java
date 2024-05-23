@@ -18,8 +18,6 @@ import java.util.List;
 /**
  * 帖子 ES 包装类
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  **/
 // todo 取消注释开启 ES（须先配置 ES）
 //@Document(indexName = "post")
@@ -85,7 +83,6 @@ public class PostEsDTO implements Serializable {
 
     /**
      * 对象转包装类
-     *
      * @param post
      * @return
      */
@@ -104,7 +101,6 @@ public class PostEsDTO implements Serializable {
 
     /**
      * 包装类转对象
-     *
      * @param postEsDTO
      * @return
      */

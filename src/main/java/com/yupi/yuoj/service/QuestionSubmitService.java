@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface QuestionSubmitService extends IService<QuestionSubmit> {
     /**
      * 题目提交
-     *
      * @param questionSubmitAddRequest
      * @param loginUser
      * @return
@@ -28,7 +27,6 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 
     /**
      * 获取查询条件
-     *
      * @param questionSubmitQueryRequest
      * @return
      */
@@ -37,7 +35,6 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 
     /**
      * 获取问题封装
-     *
      * @param question
      * @param loginUser
      * @return
@@ -46,7 +43,6 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 
     /**
      * 分页获取问题封装
-     *
      * @param questionPage
      * @param loginUser
      * @return

@@ -6,21 +6,19 @@ import com.yupi.yuoj.model.dto.user.UserQueryRequest;
 import com.yupi.yuoj.model.entity.User;
 import com.yupi.yuoj.model.vo.LoginUserVO;
 import com.yupi.yuoj.model.vo.UserVO;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 用户服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public interface UserService extends IService<User> {
 
     /**
      * 用户注册
-     *
      * @param userAccount   用户账户
      * @param userPassword  用户密码
      * @param checkPassword 校验密码
@@ -30,7 +28,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 用户登录
-     *
      * @param userAccount  用户账户
      * @param userPassword 用户密码
      * @param request
@@ -40,7 +37,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 用户登录（微信开放平台）
-     *
      * @param wxOAuth2UserInfo 从微信获取的用户信息
      * @param request
      * @return 脱敏后的用户信息
@@ -49,7 +45,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取当前登录用户
-     *
      * @param request
      * @return
      */
@@ -57,7 +52,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取当前登录用户（允许未登录）
-     *
      * @param request
      * @return
      */
@@ -65,7 +59,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 是否为管理员
-     *
      * @param request
      * @return
      */
@@ -73,7 +66,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 是否为管理员
-     *
      * @param user
      * @return
      */
@@ -81,7 +73,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 用户注销
-     *
      * @param request
      * @return
      */
@@ -89,14 +80,12 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取脱敏的已登录用户信息
-     *
-     * @return
+     *    * @return
      */
     LoginUserVO getLoginUserVO(User user);
 
     /**
      * 获取脱敏的用户信息
-     *
      * @param user
      * @return
      */
@@ -104,7 +93,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取脱敏的用户信息
-     *
      * @param userList
      * @return
      */
@@ -112,7 +100,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取查询条件
-     *
      * @param userQueryRequest
      * @return
      */

@@ -21,6 +21,4 @@ public class JudgeContext{
     private List<JudgeCase> judgeCase;
 
     private QuestionSubmit questionSubmit;
-
-
 }

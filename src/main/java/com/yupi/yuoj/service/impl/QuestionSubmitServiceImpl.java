@@ -9,9 +9,6 @@ import com.yupi.yuoj.constant.CommonConstant;
 import com.yupi.yuoj.exception.BusinessException;
 import com.yupi.yuoj.judge.service.JudgeService;
 import com.yupi.yuoj.mapper.QuestionSubmitMapper;
-import com.yupi.yuoj.model.dto.question.QuestionAddRequest;
-import com.yupi.yuoj.model.dto.question.QuestionEditRequest;
-import com.yupi.yuoj.model.dto.question.QuestionQueryRequest;
 import com.yupi.yuoj.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.yupi.yuoj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.yupi.yuoj.model.entity.Question;
@@ -20,26 +17,20 @@ import com.yupi.yuoj.model.entity.User;
 import com.yupi.yuoj.model.enums.QuestionSubmitLanguageEnum;
 import com.yupi.yuoj.model.enums.QuestionSubmitStatusEnum;
 import com.yupi.yuoj.model.vo.QuestionSubmitVO;
-import com.yupi.yuoj.model.vo.QuestionVO;
 import com.yupi.yuoj.model.vo.UserVO;
+import com.yupi.yuoj.rabbitmq.Producer;
 import com.yupi.yuoj.service.QuestionService;
 import com.yupi.yuoj.service.QuestionSubmitService;
 import com.yupi.yuoj.service.UserService;
 import com.yupi.yuoj.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -59,10 +50,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Resource
     @Lazy
     private JudgeService judgeService;
+    
+    @Resource
+    private Producer producer;
 
     /**
      * 题目提交
-     *
      * @param questionSubmitAddRequest
      * @param loginUser
      * @return
@@ -100,10 +93,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
         // 返回题目号
         Long questionSubmitId =questionSubmit.getId();
-        CompletableFuture.runAsync(()->{
-            //todo: 执行判题服务
-            judgeService.doJudgeCode(questionSubmitId);
-        });
+        producer.sendMessage("code_exchange", "my_routingKey", String.valueOf(questionSubmitId));
         return questionSubmitId;
     }
 

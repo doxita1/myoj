@@ -11,10 +11,6 @@ import com.yupi.yuoj.model.dto.file.UploadFileRequest;
 import com.yupi.yuoj.model.entity.User;
 import com.yupi.yuoj.model.enums.FileUploadBizEnum;
 import com.yupi.yuoj.service.UserService;
-import java.io.File;
-import java.util.Arrays;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Arrays;
+
 /**
  * 文件接口
- *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
- */
+ **/
 @RestController
 @RequestMapping("/file")
 @Slf4j
@@ -42,7 +40,6 @@ public class FileController {
 
     /**
      * 文件上传
-     *
      * @param multipartFile
      * @param uploadFileRequest
      * @param request
@@ -86,7 +83,6 @@ public class FileController {
 
     /**
      * 校验文件
-     *
      * @param multipartFile
      * @param fileUploadBizEnum 业务类型
      */

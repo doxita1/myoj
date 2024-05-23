@@ -15,20 +15,18 @@ import com.yupi.yuoj.model.vo.PostVO;
 import com.yupi.yuoj.service.PostFavourService;
 import com.yupi.yuoj.service.PostService;
 import com.yupi.yuoj.service.UserService;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 帖子收藏接口
- *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
- */
+ **/
 @RestController
 @RequestMapping("/post_favour")
 @Slf4j
@@ -45,7 +43,6 @@ public class PostFavourController {
 
     /**
      * 收藏 / 取消收藏
-     *
      * @param postFavourAddRequest
      * @param request
      * @return resultNum 收藏变化数
@@ -65,7 +62,6 @@ public class PostFavourController {
 
     /**
      * 获取我收藏的帖子列表
-     *
      * @param postQueryRequest
      * @param request
      */
@@ -87,7 +83,6 @@ public class PostFavourController {
 
     /**
      * 获取用户收藏的帖子列表
-     *
      * @param postFavourQueryRequest
      * @param request
      */

@@ -74,7 +74,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     /**
      * 获取查询包装类
-     *
      * @param questionQueryRequest
      * @return
      */

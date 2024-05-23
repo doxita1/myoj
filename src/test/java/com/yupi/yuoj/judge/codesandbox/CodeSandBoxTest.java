@@ -1,8 +1,7 @@
 package com.yupi.yuoj.judge.codesandbox;
 
-import com.yupi.yuoj.judge.codesandbox.impl.RemoteCodeSandBox;
+import com.yupi.yuoj.common.ErrorCode;
 import com.yupi.yuoj.judge.codesandbox.model.ExecuteCodeRequest;
-import com.yupi.yuoj.judge.codesandbox.model.ExecuteCodeResponse;
 import com.yupi.yuoj.model.enums.QuestionSubmitLanguageEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,14 +27,33 @@ class CodeSandBoxTest {
                 "        System.out.println(\"结果是:\"+(a+b));\n" +
                 "    }\n" +
                 "}";
-        String language = QuestionSubmitLanguageEnum.JAVA.getValue();
+        
+        String cppCode = "#include <iostream>\n" +
+                "\n" +
+                "int main() {\n" +
+                "    int num1, num2, sum;\n" +
+                "    std::cin >> num1;\n" +
+                "    std::cin >> num2;\n" +
+                "    sum = num1 + num2;\n" +
+                "    std::cout << \"Sum = \" << sum << std::endl;\n" +
+                "    return 0;\n" +
+                "}\n";
+        String language = QuestionSubmitLanguageEnum.CPLUSPLUS.getValue();
         List<String> inputList = Arrays.asList("1 2","3 4");
 
         ExecuteCodeRequest executeCodeRequest = ExecuteCodeRequest.builder()
-                .code(code)
+                .code(cppCode)
                 .language(language)
                 .inputList(inputList)
                 .build();
         codeSandBox.executeCode(executeCodeRequest);
+    }
+    
+    
+    @Test
+    public void testEnum(){
+        ErrorCode paramsError = ErrorCode.PARAMS_ERROR;
+        
+        System.out.println(paramsError);
     }
 }

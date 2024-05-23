@@ -11,14 +11,11 @@ import com.yupi.yuoj.model.entity.User;
 /**
  * 帖子收藏服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public interface PostFavourService extends IService<PostFavour> {
 
     /**
      * 帖子收藏
-     *
      * @param postId
      * @param loginUser
      * @return
@@ -27,7 +24,6 @@ public interface PostFavourService extends IService<PostFavour> {
 
     /**
      * 分页获取用户收藏的帖子列表
-     *
      * @param page
      * @param queryWrapper
      * @param favourUserId
@@ -38,7 +34,6 @@ public interface PostFavourService extends IService<PostFavour> {
 
     /**
      * 帖子收藏（内部服务）
-     *
      * @param userId
      * @param postId
      * @return

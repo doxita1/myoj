@@ -26,8 +26,7 @@
     </sql>
 
     <select id="listPostWithDelete" resultType="com.yupi.yuoj.model.entity.Post">
-        select *
-        from post
+        select *       from post
         where updateTime >= #{minUpdateTime}
     </select>
 </mapper>
